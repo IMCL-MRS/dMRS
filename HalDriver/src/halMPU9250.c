@@ -62,6 +62,11 @@ void halMPU9250Init(void){
     halMCUWaitMS(10);
     halSetLedStatus(LED_RED, LED_OFF);
   }
+  
+  while (wmi != 0x71) {
+    halMCUWaitMS(10);
+  }
+  
   halMCUWaitMS(10);
 }
 

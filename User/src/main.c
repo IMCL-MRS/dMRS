@@ -36,13 +36,13 @@ int main(void) {
   hal24LC02BInit();
   halI2SInit();
   
-  //load distance measuring driver
+  halMPU9250Init();  
+  SetRobotSpeed(0,0);
+  
+  //º”‘ÿ≤‚æ‡«˝∂Ø
   halTM3Init();
   halUltraSoundInit();
   halnRF24L01PInit();            
-  
-  halMPU9250Init();
-  SetRobotSpeed(0,0);
   
   //used by button
   vSemaphoreCreateBinary(xBSB1);

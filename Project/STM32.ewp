@@ -303,6 +303,7 @@
           <state>$PROJ_DIR$/../CMSIS/CM3/CoreSupport/ST/STM32F10x</state>
           <state>$PROJ_DIR$/../CMSIS/CM3/DeviceSupport/ST/STM32F10x</state>
           <state>$PROJ_DIR$/../User/inc</state>
+          <state>$PROJ_DIR$/../App/inc</state>
           <state>$PROJ_DIR$/../FreeRTOSV7.2.0/include</state>
           <state>$PROJ_DIR$/../FreeRTOSV7.2.0/portable/IAR/ARM_CM3</state>
           <state>$PROJ_DIR$/../HalDriver/inc</state>
@@ -1893,28 +1894,40 @@
     <group>
       <name>inc</name>
       <file>
-        <name>$PROJ_DIR$\..\APP\inc\BCASTTask.h</name>
+        <name>$PROJ_DIR$\..\APP\inc\apps.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\APP\inc\DEMOTask.h</name>
+        <name>$PROJ_DIR$\..\APP\inc\vBCastTask.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\APP\inc\RADIOTask.h</name>
+        <name>$PROJ_DIR$\..\APP\inc\vDemoTask.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\inc\vInfoList.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\inc\vMagTask.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\inc\vRadioTask.h</name>
       </file>
     </group>
     <group>
       <name>src</name>
       <file>
-        <name>$PROJ_DIR$\..\APP\src\BCASTTask.c</name>
+        <name>$PROJ_DIR$\..\APP\src\vBCastTask.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\APP\src\DEMOTask.c</name>
+        <name>$PROJ_DIR$\..\APP\src\vBeepTask.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\APP\src\RADIOTask.c</name>
+        <name>$PROJ_DIR$\..\APP\src\vDemoTask.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\APP\src\vBEEPTask.c</name>
+        <name>$PROJ_DIR$\..\APP\src\vMagTask.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\src\vRadioTask.c</name>
       </file>
     </group>
   </group>
@@ -2247,7 +2260,19 @@
         <name>$PROJ_DIR$\..\User\inc\FreeRTOSConfig.h</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\User\inc\intMath.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\User\inc\mrslib.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\User\inc\posSystem.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\User\inc\radio.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\User\inc\readMPUSensor.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\User\inc\stm32f10x_conf.h</name>
@@ -2277,10 +2302,19 @@
         <name>$PROJ_DIR$\..\User\src\CRC8.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\User\src\intMath.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\User\src\main.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\User\src\posSystem.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\User\src\radio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\User\src\readMPUSensor.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\User\src\stm32f10x_it.c</name>

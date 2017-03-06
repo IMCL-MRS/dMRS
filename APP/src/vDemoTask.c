@@ -32,17 +32,24 @@ void SpeedTest(){
   vTaskDelay(1000);
 }
 
-void PositionTest(){
+void PositionTest(){  
   static typeCoordinate pos;
-  static uint32_t r2B1,r2B2;
-  r2B1 = GetDistance(1);  //distance between robot and beacon1
-  r2B2 = GetDistance(2);
+  static uint32_t dis[2];
+  dis[0] = GetDistance(1);  //distance between robot and beacon1
+  dis[1] = GetDistance(2);
   pos = GetCoordinate();  //get coordinate with mm unit.
-  vTaskDelay(100);
+  if(pos.x < 2000){
+     SetRobotSpeed(50,50);
+  }else{
+     SetRobotSpeed(0,0);
+  }
+  vTaskDelay(200);
 }
 
 
 void vDemoTask( void *pvParameters ){
+  SetRobotSpeed(0,0);
+  vTaskDelay(200);
   while(1) {        
     PositionTest();
   }

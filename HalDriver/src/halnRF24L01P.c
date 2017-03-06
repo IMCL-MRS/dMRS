@@ -38,7 +38,7 @@ void halnRF24L01PInit(void){
   EXTI_Init(&EXTI_InitStructure);
   
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOD, GPIO_PinSource5);
-  
+  EXTI_ClearFlag(EXTI_Line5);
   //NVIC
   NVIC_InitTypeDef NVIC_InitStructure;
   NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;           
@@ -47,6 +47,14 @@ void halnRF24L01PInit(void){
   NVIC_Init(&NVIC_InitStructure);  
   
   //////////////////////////////////////////////////////////////////////////////
+  CEPinSetLow();
+  uint8_t rxfifo[32];
+  halnRF24L01PRdRegPacket(SPI_CMD_R_RX_PAYLOAD, rxfifo, 32);                   
+  halnRF24L01PWrRegByte(SPI_CMD_FLUSH_RX, 0xFF);
+  halnRF24L01PWrRegByte(SPI_CMD_FLUSH_TX, 0xFF);
+  halnRF24L01PWrRegByte(SPI_CMD_W_REGRESTER + REG_STATUS, MAX_RT+TX_DS+RX_DR); 
+  //////////////////////////////////////////////////////////////////////////////
+  
   halnRF24L01PRxPacket();
 }
 
@@ -102,7 +110,7 @@ void halnRF24L01PSetRxAddr(uint8_t* addr, uint8_t len) {
 
 uint8_t halnRF24L01PBroadcastPacket(uint8_t* data, uint8_t len) {
   if (halnRF24L01PRdRegByte(REG_RPD)==RPD) {
-    //return 0;
+    
   }
   halnRF24L01PTxPacket(data, len);
   return 1;
