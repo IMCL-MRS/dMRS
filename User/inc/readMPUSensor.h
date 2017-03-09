@@ -10,6 +10,7 @@ typedef struct typeMagSensor{
 }typeMagSensor;
 
 extern typeMagSensor ReadMagSensor(void);
-
+extern int16_t ReadMagSensorAngle2North(void);
+extern int16_t CalibrateNorth2X(void);
 #endif
 

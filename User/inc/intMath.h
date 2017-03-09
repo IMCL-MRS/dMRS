@@ -16,7 +16,6 @@
 #define MILLIRAD_PI				(MILLIRAD_HALF_PI * 2)
 #define MILLIRAD_2PI				(MILLIRAD_HALF_PI * 4)
 
-
 /******** Functions ********/
 //General math
 /**

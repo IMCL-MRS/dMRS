@@ -57,6 +57,7 @@ int main(void) {
   xTaskCreate( vBCastTask,   ( signed portCHAR * ) "BCAST",    configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );    
   
   xTaskCreate( vDemoTask,    ( signed portCHAR * ) "LED",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
+  //xTaskCreate( vMagTask,       ( signed portCHAR * ) "LED",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
   
   vTaskStartScheduler();
   return 0; 

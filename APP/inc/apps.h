@@ -4,6 +4,7 @@
 #include "vBCastTask.h"
 #include "vRadioTask.h"
 #include "vDemoTask.h"
+#include "vMagTask.h"
 
 /**/
 

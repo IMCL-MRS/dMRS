@@ -7,5 +7,6 @@
 #include <intMath.h>
 #include <basicMotion.h>
 #include <posSystem.h>
+#include <readMPUSensor.h>
 
 #endif

@@ -21,7 +21,7 @@ void vMagTask( void *pvParameters ) {
   minX = minY = 100000;
   maxX = maxY = -100000;
   vTaskDelay(500);
-  RobotRotate(30, 5);
+  RobotRotate(15, 5);
   for (datan = 0; datan < 48; ++ datan) {
     nowdata = ReadMagSensor();
     if (minX > nowdata.magX) minX = nowdata.magX;
@@ -29,11 +29,21 @@ void vMagTask( void *pvParameters ) {
     if (maxX < nowdata.magX) maxX = nowdata.magX;
     if (maxY < nowdata.magY) maxY = nowdata.magY;
     data[datan] = nowdata;
-    RobotRotate(30, 5);
+    RobotRotate(15, 5);
     halt(5);
   }
   magX = (minX + maxX) / 2;
-  magY = (minY + maxY) / 2;
+  magY = (minY + maxY) / 2;  
+#if 0  
+  //store magX, magY in EP2ROM
+  int i = 0;
+  int8_t magXbytes[4] = ;
+  int8_t magYBytes[4] = ;
+  for(i = 0; i < 4; i++){
+     hal24LC02BByteWrite(100+i,magXBytes[i]); 
+     hal24LC02BByteWrite(104+i,magYBytes[i]);     
+  }
+#endif  
   vTaskDelay(100000);
   asm("NOP");
 }

@@ -38,20 +38,46 @@ void PositionTest(){
   dis[0] = GetDistance(1);  //distance between robot and beacon1
   dis[1] = GetDistance(2);
   pos = GetCoordinate();  //get coordinate with mm unit.
-  if(pos.x < 2000){
-     SetRobotSpeed(50,50);
+  if(pos.x < 1500){
+     SetRobotSpeed(SPEED_FAST,SPEED_FAST);
   }else{
      SetRobotSpeed(0,0);
   }
   vTaskDelay(200);
 }
 
+void compassTest(){
+  static int16_t nAngle = 0;
+  static int16_t nXAngle = 0;
+  nAngle = ReadMagSensorAngle2North();
+  nXAngle = CalibrateNorth2X(); 
+  vTaskDelay(200);
+}
+
+void rotateTest(){
+  rotateToNorthAngle(0,10);
+  halt(20);
+  rotateToNorthAngle(90,10);
+  halt(20);
+  rotateToNorthAngle(180,10);
+  halt(20);
+  rotateToNorthAngle(270,10);
+  halt(20);
+  rotateToNorthAngle(360,10);
+  halt(20); 
+}
+
+void go2PointTest(){
+    static typeCoordinate tarPos = {1830,700}; //mm
+    go2Point(tarPos.x,tarPos.y,SPEED_MID);
+    halt(20000);
+}
 
 void vDemoTask( void *pvParameters ){
   SetRobotSpeed(0,0);
   vTaskDelay(200);
-  while(1) {        
-    PositionTest();
+  while(1) {     
+    rotateTest();  //mag parameters should re-calibrate
   }
 }
 
