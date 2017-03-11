@@ -8,6 +8,8 @@
 #include "mrslib.h"
 #include "readMPUSensor.h"
 #include "vBCastTask.h"
+#include "hal24LC02B.h"
+#include <string.h>
 
 volatile int32_t magX, magY;
 
@@ -16,6 +18,9 @@ typeMagSensor data[100], nowdata;
 int32_t minX, maxX, minY, maxY;
 
 int datan;
+int i = 0;
+static uint8_t magXbytes[4];
+static uint8_t magYBytes[4];
 void vMagTask( void *pvParameters ) {
   magX = magY = 0;
   minX = minY = 100000;
@@ -34,16 +39,14 @@ void vMagTask( void *pvParameters ) {
   }
   magX = (minX + maxX) / 2;
   magY = (minY + maxY) / 2;  
-#if 0  
   //store magX, magY in EP2ROM
-  int i = 0;
-  int8_t magXbytes[4] = ;
-  int8_t magYBytes[4] = ;
+  memcpy(magXbytes,(const void *)&magX,sizeof(magX));
+  memcpy(magYBytes,(const void *)&magX,sizeof(magY));
   for(i = 0; i < 4; i++){
-     hal24LC02BByteWrite(100+i,magXBytes[i]); 
+     hal24LC02BByteWrite(100+i,magXbytes[i]); 
      hal24LC02BByteWrite(104+i,magYBytes[i]);     
   }
-#endif  
+
   vTaskDelay(100000);
   asm("NOP");
 }

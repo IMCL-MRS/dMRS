@@ -73,11 +73,28 @@ void go2PointTest(){
     halt(20000);
 }
 
+void romRead(){
+  u8 i = 0;
+  static uint8_t outDataX[4] = {0};
+  static uint8_t outDataY[4] = {0};
+  static int32_t magX;
+  static int32_t magY;
+  for (i=0;i<4;i++) { 
+    //while (hal24LC02BRandomRead(100+i, outData+i)==false);
+    hal24LC02BRandomRead(100+i, outDataX+i);
+    hal24LC02BRandomRead(104+i, outDataY+i);
+  }
+  
+  memcpy(&magX,&outDataX,sizeof(outDataX));
+  memcpy(&magY,&outDataY,sizeof(outDataY));
+  vTaskDelay(200);
+}
+
 void vDemoTask( void *pvParameters ){
   SetRobotSpeed(0,0);
   vTaskDelay(200);
   while(1) {     
-    rotateTest();  //mag parameters should re-calibrate
+    romRead();  //mag parameters should re-calibrate
   }
 }
 

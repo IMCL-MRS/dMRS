@@ -52,7 +52,7 @@ typedef struct rbNode
 }rbNode;
 
 extern void RobotRotate(int16_t angle,int16_t speed); 
-extern void rotateToNorthAngle(float tar, float speed);
+extern void rotateToNorthAngle(int16_t tar, int16_t speed);
 extern int16_t GetLineDirectionX(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
 extern void rotateTo(int16_t x,int16_t y, int16_t speed, u8 flag);
 extern void rotateFastTo(int16_t x, int16_t y, int16_t speed,u8 flag);

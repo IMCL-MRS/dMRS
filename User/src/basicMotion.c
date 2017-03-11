@@ -32,8 +32,9 @@ void RobotRotate(int16_t angle,int16_t inSpeed) {
   SetRobotSpeed(0, 0);
 }
 
-void rotateToNorthAngle(float tar, float speed) {
-  float ang = tar - CalibrateNorth2X();
+void rotateToNorthAngle(int16_t tar, int16_t speed) {
+  static int16_t ang = 0;
+  ang = tar - CalibrateNorth2X();
   if (ang < -180) ang += 360 ;
   if (ang > 180) ang -= 360;
   RobotRotate(ang, speed);
