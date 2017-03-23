@@ -14,8 +14,8 @@
 static uint32_t distanse2B1=0, distanse2B2=0;
 
 typedef struct typeCoordinate{
-  uint32_t x;
-  uint32_t y;
+  int32_t x;
+  int32_t y;
 }typeCoordinate;
 
 extern uint32_t GetDistanse2B1(void);

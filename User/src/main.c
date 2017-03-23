@@ -16,7 +16,6 @@
 #include "task.h"
 #include "semphr.h"
 #include "bottomBoard.h"
-
 #include "apps.h"
 
 xQueueHandle xQueueHandleRFTx, xQueueHandleRFRx; //Queue of Send and Receive.
@@ -47,6 +46,10 @@ int main(void) {
   //used by button
   vSemaphoreCreateBinary(xBSB1);
   vSemaphoreCreateBinary(xBSB2);
+  
+  //read mag parameters from EPPROM
+  magParaInit();
+  
   //used by radio
   xQueueHandleRFTx = xQueueCreate(10,  32);   //uxQueueLength, uxItemSize
   xQueueHandleRFRx = xQueueCreate(10,  32);  
@@ -56,8 +59,7 @@ int main(void) {
   xTaskCreate( vRadioRxTask, ( signed portCHAR * ) "RADIO RX", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );  
   xTaskCreate( vBCastTask,   ( signed portCHAR * ) "BCAST",    configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );    
   
-  //xTaskCreate( vDemoTask,    ( signed portCHAR * ) "LED",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
-  xTaskCreate( vMagTask,       ( signed portCHAR * ) "LED",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
+  xTaskCreate( vDemoTask,    ( signed portCHAR * ) "Demo",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
   
   vTaskStartScheduler();
   return 0; 

@@ -1911,6 +1911,9 @@
       <file>
         <name>$PROJ_DIR$\..\APP\inc\vRadioTask.h</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\inc\vTestCase.h</name>
+      </file>
     </group>
     <group>
       <name>src</name>
@@ -1928,6 +1931,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\APP\src\vRadioTask.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\APP\src\vTestCase.c</name>
       </file>
     </group>
   </group>

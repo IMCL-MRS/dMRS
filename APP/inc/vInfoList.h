@@ -4,19 +4,15 @@
 #define ROBOTS 8
 #define GROBOTS 8
 
-#define CONFIG_ROBOT1
+//#define STORE_ID
+//#define ROBOT_ID 1
 
-#ifdef CONFIG_ROBOT1 
-//mag sensor para
-#define rbID            (1)
-#define MAG_SENSOR_X    (-15)
-#define MAG_SENSOR_Y    (-165)
-#elif defined(CONFIG_ROBOT2)
-#define rbID            (2)
-#define MAG_SENSOR_X    (200)
-#define MAG_SENSOR_Y    (793)
-#endif
+//mag parameters
+#define MAG_ADDR_ID (0)  //0-1 bytes
+#define MAG_ADDR_X  (2)  //2-5 bytes
+#define MAG_ADDR_Y  (6)  //6-9 bytes
 
+// -235 -1
 #define FRONT2X            (63) 
 
 #endif

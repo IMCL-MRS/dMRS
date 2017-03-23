@@ -9,6 +9,7 @@
    
 #include "bottomBoard.h"
 #include "vInfoList.h"
+#include "halBeep.h"
 #include <systemConfig.h>
 #include <stdbool.h>
 
@@ -31,8 +32,8 @@
 #define LEFT_HAND               (-1)
    
 typedef struct robotPos{
-  uint16_t locationX;        //4bytes
-  uint16_t locationY;        //4bytes
+  int32_t locationX;        //4bytes
+  int32_t locationY;        //4bytes
 }robotPos;
 
 //package information 28 Bytes
@@ -68,6 +69,7 @@ extern void RobotTowardDst(uint16_t x, uint16_t y);
 extern void RobotFollowLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 extern void RobotFollowCircle(uint16_t x, uint16_t y, uint16_t r, int16_t s);
 extern void halt(uint16_t time);
-
+extern u8 bt3Pressed();
+extern void beepSignal();
 #endif
 

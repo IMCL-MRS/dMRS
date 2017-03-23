@@ -192,8 +192,21 @@ void RobotFollowCircle(uint16_t x, uint16_t y, uint16_t r, int16_t s) {
 }
 
 void halt(uint16_t time){
-  vTaskDelay(time*100);  //0.5s
+  RobotRotate(0, 0);
+  vTaskDelay(time*100);  //0.1s
 }
 
+u8 bt3Pressed(){
+  if (GPIO_ReadInputDataBit(GPIOG, GPIO_Pin_5) == Bit_RESET) {
+    while(GPIO_ReadInputDataBit(GPIOG, GPIO_Pin_5) == Bit_RESET);
+    return 1;
+  }else{
+    return 0;
+  }  
+}
 
-
+void beepSignal(){
+  halBeepOn(3951);
+  vTaskDelay(20);
+  halBeepOff();
+}
