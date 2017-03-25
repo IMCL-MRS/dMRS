@@ -13,15 +13,18 @@
 
 
 void vDemoTask( void *pvParameters ){
-  SetRobotSpeed(0,0);
-  vTaskDelay(200);  
-  portTickType lastTimeReport = xTaskGetTickCount();
-  while((xTaskGetTickCount() - lastTimeReport) < 500){
-    if (bt3Pressed()==1) {
-      magSenPara();  //校准并写EPP2ROM,写的是对的，下面读出来就是错的。
-      break;
-    }
-  }    
-  romReadTest();  //mag parameters should re-calibrate  
-  halt(5000);     //stop
+  while(1){  
+    SetRobotSpeed(0,0);
+    vTaskDelay(200);  
+    portTickType lastTimeReport = xTaskGetTickCount();
+    while((xTaskGetTickCount() - lastTimeReport) < 500){
+      if (bt3Pressed()==1) {
+        magSenPara();  //校准并写EPP2ROM
+        break;
+      }
+    }    
+    romReadTest();   //mag parameters should re-calibrate  
+    beepSignal();
+    halt(5000);     //stop
+  }
 }

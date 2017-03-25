@@ -10,7 +10,7 @@
 #include <math.h>
 #include <string.h>
 
-extern volatile uint16_t rbID;
+volatile uint16_t rbID;
 volatile int32_t MAG_SENSOR_X;
 volatile int32_t MAG_SENSOR_Y;
 
@@ -45,7 +45,7 @@ int16_t magParaInit(){
     hal24LC02BRandomRead(MAG_ADDR_X+i, outDataX+i);
     hal24LC02BRandomRead(MAG_ADDR_Y+i, outDataY+i);
   }
-  memcpy((uint8_t *)&rbID, &outDataID, sizeof(outDataID));
+  memcpy((uint8_t *)&rbID,&outDataID,sizeof(outDataID));
   memcpy((uint8_t *)&MAG_SENSOR_X,&outDataX,sizeof(outDataX));
   memcpy((uint8_t *)&MAG_SENSOR_Y,&outDataY,sizeof(outDataY));
   return 0;

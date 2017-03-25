@@ -5,7 +5,7 @@
 #define GROBOTS 8
 
 //#define STORE_ID
-//#define ROBOT_ID 1
+#define ROBOT_ID    (1)
 
 //mag parameters
 #define MAG_ADDR_ID (0)  //0-1 bytes

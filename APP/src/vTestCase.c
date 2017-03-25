@@ -17,8 +17,8 @@
 #include "vTestCase.h"
 
 extern uint16_t rbID;
-extern int32_t magX;
-extern int32_t magY;
+extern volatile int32_t MAG_SENSOR_X;
+extern volatile int32_t MAG_SENSOR_Y;
 
 void RotateTest(){
   RobotRotate(90,SPEED_SLOW);
@@ -81,22 +81,20 @@ void go2PointTest(){
 
 void romReadTest(){
   u8 i = 0;
+  static uint8_t outDataID[2] = {0};
   static uint8_t outDataX[4] = {0};
   static uint8_t outDataY[4] = {0};
-  static uint8_t outRbID[2] = {0};
-//  static uint16_t rbID;
-//  static int32_t magX;
-//  static int32_t magY;
   for(i=0; i<2; i++){
-    hal24LC02BRandomRead(MAG_ADDR_ID+i, outRbID+i); 
+      hal24LC02BRandomRead(MAG_ADDR_ID, outDataID+i);     
   }
   for (i=0;i<4;i++) { 
     hal24LC02BRandomRead(MAG_ADDR_X+i, outDataX+i);
     hal24LC02BRandomRead(MAG_ADDR_Y+i, outDataY+i);
   }
-  memcpy((uint8_t *)&rbID,&outRbID,sizeof(outRbID));
-  memcpy((uint8_t *)&magX,&outDataX,sizeof(outDataX));
-  memcpy((uint8_t *)&magY,&outDataY,sizeof(outDataY));
+
+  memcpy((uint8_t *)&rbID,&outDataID,sizeof(outDataID));
+  memcpy((uint8_t *)&MAG_SENSOR_X,&outDataX,sizeof(outDataX));
+  memcpy((uint8_t *)&MAG_SENSOR_Y,&outDataY,sizeof(outDataY));
   vTaskDelay(200);
 }
 
@@ -243,9 +241,14 @@ void EEPROM_Task( void *pvParameters ) {
   
   while (1) {
     uint8_t i;
-    static uint8_t inData[100], outData[100];
-    for (i=0;i<100;i++) {
-      inData[i]  = i;
+    static uint8_t inData[100], outData[100];    
+   
+//    for(i=0; i< 100; i++){
+//      inData[i] = -1;
+//      memset(&outData[i],inData[i],sizeof(int8_t));
+//    }
+    for (i=0;i<100;i++){
+      inData[i] = i;
       outData[i] = 0;
     }
     for (i=0;i<100;i++) { 
