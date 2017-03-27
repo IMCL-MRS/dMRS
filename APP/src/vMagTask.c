@@ -21,9 +21,6 @@ extern volatile int32_t MAG_SENSOR_Y;
 typeMagSensor data[100], nowdata;
 int32_t minX, maxX, minY, maxY;
 
-static uint8_t idBytes[2];
-static uint8_t magXbytes[4];
-static uint8_t magYBytes[4];
 int32_t magXTmp[2];
 int32_t magYTmp[2];
 //void vMagTask( void *pvParameters ) {
@@ -31,11 +28,18 @@ void magSenPara(){
   int datan;
   int i = 0;
 #ifdef STORE_ID
-  rbID = ROBOT_ID;
-  memcpy(idBytes,(uint8_t *)&rbID,sizeof(rbID));
+  rbID = ROBOT_ID;  
+  for(i=0; i < 2; i++){
+    while (hal24LC02BByteWrite(MAG_ADDR_ID+i*2, *((uint8_t *)(&rbID) + i*2))==false);
+    while (hal24LC02BByteWrite(MAG_ADDR_ID+i*2 + 1, *((uint8_t *)(&rbID) + i*2+1))==false);
+  }  
+  static int8_t outBytes[2];
+  static int16_t id;
   for(i=0; i<2; i++){
-      hal24LC02BByteWrite(MAG_ADDR_ID + i,idBytes[i]); 
+    while (hal24LC02BRandomRead(MAG_ADDR_ID+i*2, (uint8_t *)(&id)+i*2)==false);
+    while (hal24LC02BRandomRead(MAG_ADDR_ID+i*2 + 1, (uint8_t *)(&id) + i*2 + 1)==false);
   }
+ asm("NOP");
 #else  
   MAG_SENSOR_X = MAG_SENSOR_Y = 0;
   minX = minY = 100000;
@@ -60,16 +64,17 @@ void magSenPara(){
   MAG_SENSOR_Y = (int32_t)((magYTmp[0] + magYTmp[1]) / 2);
   
   rbID = ROBOT_ID;
-  memcpy(idBytes,(uint8_t *)&rbID,sizeof(rbID));
   for(i=0; i<2; i++){
-      hal24LC02BByteWrite(MAG_ADDR_ID + i,idBytes[i]); 
+    while (hal24LC02BByteWrite(MAG_ADDR_ID+i*2, *((uint8_t *)(&rbID) + i*2))==false);
+    while (hal24LC02BByteWrite(MAG_ADDR_ID+i*2 + 1, *((uint8_t *)(&rbID) + i*2+1))==false);
   }
-  //store magX, magY in EP2ROM
-  memcpy(magXbytes,(uint8_t *)&MAG_SENSOR_X,sizeof(MAG_SENSOR_X));
-  memcpy(magYBytes,(uint8_t *)&MAG_SENSOR_Y,sizeof(MAG_SENSOR_Y));
+  
   for(i = 0; i < 4; i++){
-     hal24LC02BByteWrite(MAG_ADDR_X+i,magXbytes[i]); 
-     hal24LC02BByteWrite(MAG_ADDR_Y+i,magYBytes[i]);     
+    while (hal24LC02BByteWrite(MAG_ADDR_X+i*2, *((uint8_t *)(&MAG_SENSOR_X) + i*2))==false);
+    while (hal24LC02BByteWrite(MAG_ADDR_X+i*2 + 1, *((uint8_t *)(&MAG_SENSOR_X) + i*2+1))==false);
+    
+    while (hal24LC02BByteWrite(MAG_ADDR_Y+i*2, *((uint8_t *)(&MAG_SENSOR_Y) + i*2))==false);
+    while (hal24LC02BByteWrite(MAG_ADDR_Y+i*2 + 1, *((uint8_t *)(&MAG_SENSOR_Y) + i*2+1))==false);
   }
   
 #endif

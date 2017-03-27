@@ -19,7 +19,7 @@
           
           
           
-        <Column0>20</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>48</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Disassembly>
         <col-names>
@@ -39,7 +39,7 @@
           
           
           
-        <item>rbID</item><item>magX</item><item>magY</item><item>outRbID</item><item>outDataID</item><item>outDataY</item><item>inData</item><item>outData</item><item>outData[i]</item><item>magX</item><item>magY</item><item>outDataX</item><item>outDataY</item><item>MAG_SENSOR_X</item><item>MAG_SENSOR_Y</item><item/></expressions>
+        <item>coordinateC</item><item>yTmp</item><item>xTmp</item><item>disB1*disB1</item><item>disB2*disB2</item><item>1100.0*1100.0</item><item>2*1100.0</item><item>disB1*disB1+(DISTANSE_B1_2_B2*DISTANSE_B1_2_B2)/</item><item>coordinateC</item><item>yTmp</item><item>xTmp</item><item>disB1</item><item>outData</item><item>inData</item><item>vDemoTask</item><item>rbID</item><item>id</item><item>rbID</item><item>outDataX</item><item>outDataY</item><item>rbID</item><item>MAG_SENSOR_X</item><item>MAG_SENSOR_Y</item><item></item></expressions>
         <col-names>
           
           
@@ -51,7 +51,7 @@
           
           
           
-        <item>93</item><item>150</item><item>100</item><item>161</item></col-widths>
+        <item>93</item><item>150</item><item>100</item><item>325</item></col-widths>
       <PreferedWindows><Position>2</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows></WATCH_1>
     <Find-All-Declarations><ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Find-All-Declarations><Find-All-References><ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Find-All-References><Select-Ambiguous-Definitions><ColumnWidth0>529</ColumnWidth0><ColumnWidth1>75</ColumnWidth1><ColumnWidth2>908</ColumnWidth2></Select-Ambiguous-Definitions><Register><PreferedWindows><Position>2</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows></Register><QuickWatch><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>100</item><item>150</item><item>100</item><item>100</item></col-widths><QWatchHistory><item>p</item></QWatchHistory></QuickWatch></Static>
     <Windows>
@@ -83,7 +83,7 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>STM32</ExpandedNode><ExpandedNode>STM32/HalDriver</ExpandedNode><ExpandedNode>STM32/HalDriver/inc</ExpandedNode><ExpandedNode>STM32/HalDriver/src</ExpandedNode><ExpandedNode>STM32/User</ExpandedNode><ExpandedNode>STM32/User/inc</ExpandedNode><ExpandedNode>STM32/User/src</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>STM32</ExpandedNode><ExpandedNode>STM32/APP</ExpandedNode><ExpandedNode>STM32/APP/inc</ExpandedNode><ExpandedNode>STM32/APP/src</ExpandedNode><ExpandedNode>STM32/HalDriver</ExpandedNode><ExpandedNode>STM32/HalDriver/inc</ExpandedNode><ExpandedNode>STM32/HalDriver/src</ExpandedNode><ExpandedNode>STM32/User</ExpandedNode><ExpandedNode>STM32/User/inc</ExpandedNode><ExpandedNode>STM32/User/src</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
@@ -93,14 +93,14 @@
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\inc\vInfoList.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>85</SelStart2><SelEnd2>85</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\User\src\readMPUSensor.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>58</YPos2><SelStart2>1999</SelStart2><SelEnd2>1999</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vTestCase.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>69</YPos2><SelStart2>1755</SelStart2><SelEnd2>1755</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\inc\vBCastTask.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>6</YPos2><SelStart2>528</SelStart2><SelEnd2>528</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\User\src\posSystem.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>320</SelStart2><SelEnd2>320</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\User\src\bottomBoard.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>38</YPos2><SelStart2>1428</SelStart2><SelEnd2>1428</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\HalDriver\inc\halLed.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>155</SelStart2><SelEnd2>155</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vBCastTask.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>7</YPos2><SelStart2>645</SelStart2><SelEnd2>645</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\User\src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>14</YPos2><SelStart2>530</SelStart2><SelEnd2>530</SelEnd2></Tab><ActiveTab>8</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vDemoTask.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>649</SelStart2><SelEnd2>649</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vMagTask.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>64</YPos2><SelStart2>2158</SelStart2><SelEnd2>2173</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vDemoTask.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1</YPos2><SelStart2>538</SelStart2><SelEnd2>538</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vTestCase.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>80</YPos2><SelStart2>2472</SelStart2><SelEnd2>2472</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\User\src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>14</YPos2><SelStart2>530</SelStart2><SelEnd2>530</SelEnd2></Tab><ActiveTab>2</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\APP\src\vBCastTask.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>8</YPos2><SelStart2>626</SelStart2><SelEnd2>626</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-04D91D38><key>iaridepm.enu1</key></Toolbar-04D91D38></Sizes></Row0><Row1><Sizes><Toolbar-0DFF27F0><key>debuggergui.enu1</key></Toolbar-0DFF27F0></Sizes></Row1><Row2><Sizes><Toolbar-0DFF28B8><key>armstlink.enu1</key></Toolbar-0DFF28B8></Sizes></Row2></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>436</Bottom><Right>111</Right><x>-2</x><y>-2</y><xscreen>167</xscreen><yscreen>184</yscreen><sizeHorzCX>130469</sizeHorzCX><sizeHorzCY>256625</sizeHorzCY><sizeVertCX>88281</sizeVertCX><sizeVertCY>610879</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>436</Bottom><Right>431</Right><x>-2</x><y>-2</y><xscreen>167</xscreen><yscreen>184</yscreen><sizeHorzCX>130469</sizeHorzCX><sizeHorzCY>256625</sizeHorzCY><sizeVertCX>338281</sizeVertCX><sizeVertCY>610879</sizeVertCY></Rect></Wnd4></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>188</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>190</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>264993</sizeHorzCY><sizeVertCX>130469</sizeVertCX><sizeVertCY>256625</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-04851D38><key>iaridepm.enu1</key></Toolbar-04851D38></Sizes></Row0><Row1><Sizes><Toolbar-0A44C9D8><key>debuggergui.enu1</key></Toolbar-0A44C9D8></Sizes></Row1><Row2><Sizes><Toolbar-0A436FC0><key>armstlink.enu1</key></Toolbar-0A436FC0></Sizes></Row2></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>436</Bottom><Right>139</Right><x>-2</x><y>-2</y><xscreen>167</xscreen><yscreen>184</yscreen><sizeHorzCX>130469</sizeHorzCX><sizeHorzCY>256625</sizeHorzCY><sizeVertCX>110156</sizeVertCX><sizeVertCY>610879</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>436</Bottom><Right>297</Right><x>-2</x><y>-2</y><xscreen>167</xscreen><yscreen>184</yscreen><sizeHorzCX>130469</sizeHorzCX><sizeHorzCY>256625</sizeHorzCY><sizeVertCX>233594</sizeVertCX><sizeVertCY>610879</sizeVertCY></Rect></Wnd4></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>188</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>190</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>264993</sizeHorzCY><sizeVertCX>130469</sizeVertCX><sizeVertCY>256625</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Project>
 

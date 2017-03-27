@@ -15,39 +15,34 @@ volatile int32_t MAG_SENSOR_X;
 volatile int32_t MAG_SENSOR_Y;
 
 static typeMagSensor magSensor;
-typeMagSensor ReadMagSensorStatus(u8 st[]) {
-  st[0] = halMPU9250RdCompassX(&magSensor.magX); //cmopass data update every 10ms
-  st[1] = halMPU9250RdCompassY(&magSensor.magY);
-  st[2] = halMPU9250RdCompassZ(&magSensor.magZ);
-  return magSensor;
-}
-
-typeMagSensor ReadMagSensor(void) {
-  u8 st[3] = {0};
-  magSensor = ReadMagSensorStatus(st);
-  while(!(st[0] && st[1] && st[2])){
+typeMagSensor ReadMagSensor() {  
+  while(halMPU9250RdCompassX(&magSensor.magX) == 0){ //cmopass data update every 10ms
     vTaskDelay(5);
-    magSensor = ReadMagSensorStatus(st);
+  }  
+  while(halMPU9250RdCompassX(&magSensor.magY) == 0){ 
+    vTaskDelay(5);
+  }  
+  while(halMPU9250RdCompassX(&magSensor.magZ) == 0){ 
+    vTaskDelay(5);
   }
+
   return magSensor;
 }
 
 int16_t magParaInit(){
   u8 i = 0;
-  uint8_t outDataID[2] = {0};
-  uint8_t outDataX[4] = {0};
-  uint8_t outDataY[4] = {0};
   for(i=0; i<2; i++){
-    hal24LC02BRandomRead(MAG_ADDR_ID+i, outDataID+i);
+    while(hal24LC02BRandomRead(MAG_ADDR_ID+i*2, (uint8_t *)(&rbID)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_ID+i*2+1, (uint8_t *)(&rbID)+i*2+1) == false);
   }
   
   for (i=0;i<4;i++) { 
-    hal24LC02BRandomRead(MAG_ADDR_X+i, outDataX+i);
-    hal24LC02BRandomRead(MAG_ADDR_Y+i, outDataY+i);
+    while(hal24LC02BRandomRead(MAG_ADDR_X+i*2, (uint8_t *)(&MAG_SENSOR_X)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_X+i*2+1, (uint8_t *)(&MAG_SENSOR_X)+i*2+1) == false);
+    
+    while(hal24LC02BRandomRead(MAG_ADDR_Y+i*2, (uint8_t *)(&MAG_SENSOR_Y)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_Y+i*2+1, (uint8_t *)(&MAG_SENSOR_Y)+i*2+1) == false);
   }
-  memcpy((uint8_t *)&rbID,&outDataID,sizeof(outDataID));
-  memcpy((uint8_t *)&MAG_SENSOR_X,&outDataX,sizeof(outDataX));
-  memcpy((uint8_t *)&MAG_SENSOR_Y,&outDataY,sizeof(outDataY));
   return 0;
 }
 

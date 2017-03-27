@@ -81,20 +81,20 @@ void go2PointTest(){
 
 void romReadTest(){
   u8 i = 0;
-  static uint8_t outDataID[2] = {0};
-  static uint8_t outDataX[4] = {0};
-  static uint8_t outDataY[4] = {0};
+  static int16_t rbID = 0;
+  static int32_t outDataX = 0;
+  static int32_t outDataY = 0;
   for(i=0; i<2; i++){
-      hal24LC02BRandomRead(MAG_ADDR_ID, outDataID+i);     
+    while(hal24LC02BRandomRead(MAG_ADDR_ID+i*2, (uint8_t *)(&rbID)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_ID+i*2+1, (uint8_t *)(&rbID)+i*2+1) == false);     
   }
   for (i=0;i<4;i++) { 
-    hal24LC02BRandomRead(MAG_ADDR_X+i, outDataX+i);
-    hal24LC02BRandomRead(MAG_ADDR_Y+i, outDataY+i);
+    while(hal24LC02BRandomRead(MAG_ADDR_X+i*2, (uint8_t *)(&outDataX)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_X+i*2+1, (uint8_t *)(&outDataX)+i*2+1) == false);
+    
+    while(hal24LC02BRandomRead(MAG_ADDR_Y+i*2, (uint8_t *)(&outDataY)+i*2) == false);
+    while(hal24LC02BRandomRead(MAG_ADDR_Y+i*2+1, (uint8_t *)(&outDataY)+i*2+1) == false);
   }
-
-  memcpy((uint8_t *)&rbID,&outDataID,sizeof(outDataID));
-  memcpy((uint8_t *)&MAG_SENSOR_X,&outDataX,sizeof(outDataX));
-  memcpy((uint8_t *)&MAG_SENSOR_Y,&outDataY,sizeof(outDataY));
   vTaskDelay(200);
 }
 
@@ -241,22 +241,19 @@ void EEPROM_Task( void *pvParameters ) {
   
   while (1) {
     uint8_t i;
-    static uint8_t inData[100], outData[100];    
-   
-//    for(i=0; i< 100; i++){
-//      inData[i] = -1;
-//      memset(&outData[i],inData[i],sizeof(int8_t));
-//    }
+    static int16_t inData[100], outData[100];      
     for (i=0;i<100;i++){
-      inData[i] = i;
+      inData[i] = -i;
       outData[i] = 0;
     }
     for (i=0;i<100;i++) { 
-      while (hal24LC02BByteWrite(100+i, inData[i])==false);
+      while (hal24LC02BByteWrite(100+i*2, *((uint8_t *)(inData) + i*2))==false);
+      while (hal24LC02BByteWrite(100+i*2 + 1, *((uint8_t *)(inData) + i*2+1))==false);
     }
     
     for (i=0;i<100;i++) { 
-      while (hal24LC02BRandomRead(100+i, outData+i)==false);
+      while (hal24LC02BRandomRead(100+i*2, (uint8_t *)(outData)+i*2)==false);
+      while (hal24LC02BRandomRead(100+i*2 + 1, (uint8_t *)(outData) + i*2 + 1)==false);
     }
     
     for (i=0;i<100;i++) {

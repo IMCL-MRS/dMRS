@@ -47,9 +47,6 @@ int main(void) {
   vSemaphoreCreateBinary(xBSB1);
   vSemaphoreCreateBinary(xBSB2);
   
-  //read mag parameters from EPPROM
-  magParaInit();
-  
   //used by radio
   xQueueHandleRFTx = xQueueCreate(10,  32);   //uxQueueLength, uxItemSize
   xQueueHandleRFRx = xQueueCreate(10,  32);  
@@ -58,7 +55,7 @@ int main(void) {
   xTaskCreate( vRadioTxTask, ( signed portCHAR * ) "RADIO TX", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );    
   xTaskCreate( vRadioRxTask, ( signed portCHAR * ) "RADIO RX", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );  
   xTaskCreate( vBCastTask,   ( signed portCHAR * ) "BCAST",    configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );    
-  
+   
   xTaskCreate( vDemoTask,    ( signed portCHAR * ) "Demo",      configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );      
   
   vTaskStartScheduler();

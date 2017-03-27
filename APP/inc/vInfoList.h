@@ -12,7 +12,7 @@
 #define MAG_ADDR_X  (2)  //2-5 bytes
 #define MAG_ADDR_Y  (6)  //6-9 bytes
 
-// -235 -1
+// 82 79
 #define FRONT2X            (63) 
 
 #endif

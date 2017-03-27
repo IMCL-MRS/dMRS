@@ -8,8 +8,8 @@
 #define __POS_SYSTEM_H
 #include "ultraSound.h"
 
-#define DISTANSE_B1_2_B2         (1100)  //110mm
-#define DISTANSE_B_2_GROUND      (1750)  //175mm
+#define DISTANSE_B1_2_B2         (1100.0)  //110mm
+#define DISTANSE_B_2_GROUND      (1750.0)  //175mm
 
 static uint32_t distanse2B1=0, distanse2B2=0;
 

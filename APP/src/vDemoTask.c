@@ -13,6 +13,8 @@
 
 
 void vDemoTask( void *pvParameters ){
+  //read mag parameters from EPPROM
+  magParaInit();
   while(1){  
     SetRobotSpeed(0,0);
     vTaskDelay(200);  
@@ -22,7 +24,7 @@ void vDemoTask( void *pvParameters ){
         magSenPara();  //Ð£×¼²¢Ð´EPP2ROM
         break;
       }
-    }    
+    } 
     romReadTest();   //mag parameters should re-calibrate  
     beepSignal();
     halt(5000);     //stop
