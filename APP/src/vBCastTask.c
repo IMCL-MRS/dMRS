@@ -23,7 +23,7 @@ void vBCastTask( void *pvParameters ){
     p->locationY = pos.y;
 //    p->locationX = MAG_SENSOR_X;
 //    p->locationY = MAG_SENSOR_Y;
-    p->dir    = ReadMagSensorAngle2North();//CalibrateNorth2X();
+    p->dir    = CalibrateNorth2X();//ReadMagSensorAngle2North();
     p->speedL = GetRobotSpeedLeft();
     p->speedR = GetRobotSpeedRight();
     p->crc16Res = CRC16(tx, sizeof(type_RFPacket)-2);

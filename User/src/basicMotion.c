@@ -14,21 +14,47 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void RobotRotate(int16_t angle,int16_t inSpeed) {
-  static int16_t giveAngle;
-  static uint32_t timeInterval;
-  
-  int16_t speed = boundAbs(inSpeed,SPEED_MID);
-  if (angle < 0) {
-    giveAngle = (int16_t)(-angle*MILLIRAD_PI/180.0);   //rad
+//void RobotRotate(int16_t angle,int16_t inSpeed) {
+//  static int16_t giveAngle;
+//  static uint32_t timeInterval;
+//  
+//  int16_t speed = boundAbs(inSpeed,SPEED_MID);
+//  if (angle < 0) {
+//    giveAngle = (int16_t)(-angle*MILLIRAD_PI/180.0);   //rad
+//    SetRobotSpeed(speed, 0-speed);
+//  }
+//  else {
+//    giveAngle = (int16_t)(angle*MILLIRAD_PI/180);   //rad
+//    SetRobotSpeed(0-speed, speed);
+//  }     
+//  timeInterval = (uint32_t)(giveAngle*(WHEEL_L_R_DISTANCE)/(2.0*speed)); //(L = n*PI*r/180)
+//  vTaskDelay(timeInterval);
+//  SetRobotSpeed(0, 0);
+//  asm("NOP");
+//}
+
+void RobotRotate(float angle, int16_t speed) {
+  static float givenAngle;
+  static float timeInterval;
+  if (FloatAbs(speed) > SPEED_MID) {
+    if (speed<0) {
+      speed = 0 - SPEED_MID;
+    }
+    else {
+      speed = SPEED_MID;
+    }
+  }
+  if (angle<0) {
+    givenAngle = -angle/180*__PI;
     SetRobotSpeed(speed, 0-speed);
   }
   else {
-    giveAngle = (int16_t)(angle*MILLIRAD_PI/180);   //rad
+    givenAngle = angle/180*__PI;
     SetRobotSpeed(0-speed, speed);
-  }     
-  timeInterval = (uint32_t)(giveAngle*(WHEEL_L_R_DISTANCE*10)/(2*10*speed)); //(L = n*PI*r/180)
-  vTaskDelay(timeInterval);
+  }
+  timeInterval = 1000*givenAngle*(WHEEL_L_R_DISTANCE)/(2*speed); //(L = n*PI*r/180)
+  vTaskDelay((unsigned long)(timeInterval));  //1.6
+  
   SetRobotSpeed(0, 0);
 }
 
@@ -41,16 +67,15 @@ void rotateToNorthAngle(int16_t tar, int16_t speed) {
 }
 
 //0 - 360 degree
-int16_t GetLineDirectionX(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
-  float angle,eLong,comX, comY;
+int16_t GetLineDirectionX(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
+  float eLong,comX, comY;
+  static float angle;
   
   comX = (float)(x1-x0);
   comY = (float)(y1-y0);
   
-  //eLong = sqrtInt(comX*comX + comY*comY);
-  //angle = (180*1000/MILLIRAD_PI) * (int16_t)acos(abs(comX)/eLong);  //0 to 90 degree
   eLong= sqrt(comX*comX + comY*comY);     
-  angle = ((180/__PI)*acos(comY/eLong));
+  angle = ((180/__PI)*acos(FloatAbs(comY)/eLong));
   
   if ((comX>=0) && (comY>=0)) {     //1
 	angle = angle;
@@ -67,36 +92,36 @@ int16_t GetLineDirectionX(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
   return (int16_t)angle;
 }
 
-void rotateTo(int16_t x,int16_t y, int16_t speed, u8 flag){
+void rotateTo(int32_t x,int32_t y, int16_t speed, u8 flag){
   typeCoordinate start = GetCoordinate();
   int16_t lineDir = GetLineDirectionX(start.x, start.y, x, y);
   int16_t robotDir = CalibrateNorth2X();
-  int16_t turnangle = lineDir - robotDir;
+  float turnangle = lineDir - robotDir;
   if (turnangle < -180) turnangle += 360 ;
   if (turnangle > 180) turnangle -= 360;
   if(flag == ROTATE_LARGER_15){
-    if(abs(turnangle) <= 15)    
+    if(FloatAbs(turnangle) <= 15)    
       return;
   }
   
   if(flag == ROTATE_LARGER_25){
-    if(abs(turnangle) <= 25)   
+    if(FloatAbs(turnangle) <= 25)   
       return;
   }
   
   RobotRotate(turnangle, speed);
 }
 
-void rotateFastTo(int16_t x, int16_t y, int16_t speed,u8 flag) {
+void rotateFastTo(int32_t x, int32_t y, int16_t speed,u8 flag) {
   rotateTo(x,y,SPEED_MID,ROTATE_ACCURATE);
   rotateTo(x,y,SPEED_SLOW,ROTATE_ACCURATE);
 }
 
-int16_t getDistance(int16_t Ax, int16_t Ay, int16_t Bx, int16_t By) {
+int16_t getDistance(int32_t Ax, int32_t Ay, int32_t Bx, int32_t By) {
   return sqrtInt( (Ax-Bx)*(Ax-Bx) + (Ay-By)*(Ay-By));
 }
 
-bool GoalInFront(int16_t x, int16_t y){
+bool GoalInFront(int32_t x, int32_t y){
   typeCoordinate nowp = GetCoordinate();
   int16_t dist = getDistance(nowp.x, nowp.y, x,y);
   if( dist < MIN_RANGE)
@@ -105,28 +130,28 @@ bool GoalInFront(int16_t x, int16_t y){
 	return false;
 }
 
-int whichSide(int16_t x, int16_t y){
+int whichSide(int32_t x, int32_t y){
   typeCoordinate start = GetCoordinate();
   int16_t lineDir = GetLineDirectionX(start.x, start.y, x, y);
   int16_t robotDir = CalibrateNorth2X();
-  int16_t turnangle = lineDir - robotDir;
+  float turnangle = lineDir - robotDir;
   if (turnangle < -180) turnangle += 360;
   if (turnangle > 180) turnangle -= 360;
   
-  if(abs(turnangle) <= 25){
+  if(FloatAbs(turnangle) <= 25){
     if(turnangle > 0)
       return 1; //right side
     if(turnangle < 0)
       return -1;  //left side
   }
   
-  if(abs(turnangle) > 25){
+  if(FloatAbs(turnangle) > 25){
     RobotRotate(turnangle, SPEED_SLOW);
   }
   return 0;  // on the line
 }
 
-void go2Point(int16_t x, int16_t y,int16_t speed){
+void go2Point(int32_t x, int32_t y,int16_t speed){
   rotateFastTo(x,y,SPEED_MID,ROTATE_ACCURATE);
   int cell = MAX_MOTORDETA;
   int16_t speedL = speed;

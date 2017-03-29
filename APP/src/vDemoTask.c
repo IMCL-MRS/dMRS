@@ -12,21 +12,18 @@
 #include <task.h>
 
 
-void vDemoTask( void *pvParameters ){
-  //read mag parameters from EPPROM
-  magParaInit();
-  while(1){  
-    SetRobotSpeed(0,0);
-    vTaskDelay(200);  
-    portTickType lastTimeReport = xTaskGetTickCount();
-    while((xTaskGetTickCount() - lastTimeReport) < 500){
-      if (bt3Pressed()==1) {
-        magSenPara();  //校准并写EPP2ROM
-        break;
-      }
-    } 
-    romReadTest();   //mag parameters should re-calibrate  
-    beepSignal();
-    halt(5000);     //stop
-  }
+void vDemoTask( void *pvParameters ){  
+  //magParaInit();   /*read mag parameters from EPPROM */
+  SetRobotSpeed(0,0);
+  vTaskDelay(200);  
+  portTickType lastTimeReport = xTaskGetTickCount();
+  while((xTaskGetTickCount() - lastTimeReport) < 500){
+    if (bt3Pressed()==1) {
+      magSenPara();  //校准并写EPPROM
+      break;
+    }
+  } 
+  go2PointTest();
+  beepSignal();
+  halt(5000);     //stop
 }

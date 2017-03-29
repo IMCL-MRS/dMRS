@@ -17,16 +17,16 @@ uint32_t GetDistanse2B2(void) {
 }
 
 typeCoordinate GetCoordinate(void) {
-  static float disB1, disB2;
-  static float yTmp;
-  static float xTmp;
+  float disB1, disB2, xTmp,yTmp;
   static typeCoordinate coordinateC;
   
   disB1 = GetDistanse2B1();
   disB2 = GetDistanse2B2();
   
-  coordinateC.y = (disB1*disB1 - disB2*disB2 + DISTANSE_B1_2_B2*DISTANSE_B1_2_B2)/(2*DISTANSE_B1_2_B2);
-  coordinateC.x = sqrt(disB1*disB1 - DISTANSE_B1_2_B2*DISTANSE_B1_2_B2 - yTmp*yTmp);
+  yTmp = (disB1*disB1 - disB2*disB2 + DISTANSE_B1_2_B2*DISTANSE_B1_2_B2)/(2*DISTANSE_B1_2_B2);
+  xTmp = sqrt(disB1*disB1 - DISTANSE_B1_2_B2*DISTANSE_B1_2_B2 - yTmp*yTmp);
+  coordinateC.x = xTmp;
+  coordinateC.y = yTmp;
   return coordinateC;
 }
 

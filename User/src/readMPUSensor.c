@@ -10,19 +10,19 @@
 #include <math.h>
 #include <string.h>
 
-volatile uint16_t rbID;
-volatile int32_t MAG_SENSOR_X;
-volatile int32_t MAG_SENSOR_Y;
+volatile uint16_t rbID = 1;
+volatile int32_t MAG_SENSOR_X = 89;
+volatile int32_t MAG_SENSOR_Y = 67;
 
 static typeMagSensor magSensor;
 typeMagSensor ReadMagSensor() {  
   while(halMPU9250RdCompassX(&magSensor.magX) == 0){ //cmopass data update every 10ms
     vTaskDelay(5);
   }  
-  while(halMPU9250RdCompassX(&magSensor.magY) == 0){ 
+  while(halMPU9250RdCompassY(&magSensor.magY) == 0){ 
     vTaskDelay(5);
   }  
-  while(halMPU9250RdCompassX(&magSensor.magZ) == 0){ 
+  while(halMPU9250RdCompassZ(&magSensor.magZ) == 0){ 
     vTaskDelay(5);
   }
 
@@ -59,7 +59,7 @@ int16_t ReadMagSensorAngle2North(void) {
   edgeLong= sqrt(compX*compX + compY*compY);     
   angleReturn = ((180/__PI)*acos(compY/edgeLong));
   
-  if (compX < 0){    
+  if (compX > 0){    
     angleReturn=0-angleReturn;
   }   
 
@@ -69,10 +69,10 @@ int16_t ReadMagSensorAngle2North(void) {
 //0 - 360
 int16_t CalibrateNorth2X(void){
   int16_t nAngle = ReadMagSensorAngle2North();
-  if((nAngle >= -180) && (nAngle < -160)){
-    nAngle = -nAngle - 160;
-  }else{
-    nAngle = -nAngle + 200;
+  if((nAngle >= -180) && (nAngle <= 160)){
+    nAngle = nAngle + 200;
+  }else if((nAngle >= 160) && (nAngle <= 180)){
+    nAngle = nAngle - 160;
   }
   return nAngle;
 }

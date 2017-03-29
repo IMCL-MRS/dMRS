@@ -77,4 +77,5 @@ int32_t max(int32_t x, int32_t y);
  */
 int32_t boundAbs(int32_t val, int32_t bound);
 
+float FloatAbs(float data);
 #endif

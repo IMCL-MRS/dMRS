@@ -110,3 +110,10 @@ int32_t boundAbs(int32_t val, int32_t bound) {
 	}
 	return(val);
 }
+
+float FloatAbs(float data) {
+  if (data<0.0) {
+    return (0.0-data);
+  }
+  return data;
+}

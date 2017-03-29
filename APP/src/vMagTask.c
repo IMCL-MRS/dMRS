@@ -19,10 +19,10 @@ extern volatile int32_t MAG_SENSOR_Y;
 
 //get magX and magY
 typeMagSensor data[100], nowdata;
-int32_t minX, maxX, minY, maxY;
+float minX, maxX, minY, maxY;
 
-int32_t magXTmp[2];
-int32_t magYTmp[2];
+float magXTmp[2];
+float magYTmp[2];
 //void vMagTask( void *pvParameters ) {
 void magSenPara(){
   int datan;
@@ -57,8 +57,8 @@ void magSenPara(){
       RobotRotate(15, 5);
       halt(5);
     }
-    magXTmp[i] = (int32_t)((minX + maxX) / 2);
-    magYTmp[i] = (int32_t)((minY + maxY) / 2);  
+    magXTmp[i] = ((minX + maxX) / 2);
+    magYTmp[i] = ((minY + maxY) / 2);  
   }
   MAG_SENSOR_X = (int32_t)((magXTmp[0] + magXTmp[1]) / 2);
   MAG_SENSOR_Y = (int32_t)((magYTmp[0] + magYTmp[1]) / 2);

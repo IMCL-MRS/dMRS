@@ -60,7 +60,7 @@ void compassTest(){
  
 }
 
-void rotateTest(){
+void rotateTest2(){
   rotateToNorthAngle(0,10);
   halt(20);
   rotateToNorthAngle(90,10);
@@ -71,6 +71,14 @@ void rotateTest(){
   halt(20);
   rotateToNorthAngle(360,10);
   halt(20); 
+}
+
+void rotateTest(){
+  halt(30);
+  RobotRotate(90,10);
+  halt(30);
+  RobotRotate(-90,10);
+  halt(30);
 }
 
 void go2PointTest(){
