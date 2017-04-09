@@ -11,6 +11,10 @@
 #include "halBeep.h"
 #include <task.h>
 
+const typeCoordinate posA1 = {1410,50};
+const typeCoordinate posA2 = {1410,1400};
+const typeCoordinate posA3 = {2800,1400};
+const typeCoordinate posA4 = {2800,50};
 
 void vDemoTask( void *pvParameters ){  
   //magParaInit();   /*read mag parameters from EPPROM */
@@ -23,7 +27,8 @@ void vDemoTask( void *pvParameters ){
       break;
     }
   } 
-  go2PointTest();
+  //go2PointTest();
+  rotateTest();
   beepSignal();
   halt(5000);     //stop
 }

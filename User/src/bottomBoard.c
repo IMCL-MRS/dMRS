@@ -8,6 +8,7 @@ static uint8_t  infraredSensorStatus=0;
 static int16_t  sl=0, sr=0;
 static uint8_t  batV1248=0;
 
+//红外传感器的值和速度
 uint8_t GetRobotBStatus(uint8_t* infSensor, int16_t* sL, int16_t* sR, uint8_t* bat1248) {
   uint8_t slL,slH,srL,srH;
   uint8_t txBuf[7];
