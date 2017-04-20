@@ -77,12 +77,24 @@ void rotateTest(){
   halt(30);
   RobotRotate(90,10);
   halt(30);
+  RobotRotate(90,10);
+  halt(30);
+  RobotRotate(90,10);
+  halt(30);
+  RobotRotate(90,10);
+  halt(30);
+  RobotRotate(-90,10);
+  halt(30);
+  RobotRotate(-90,10);
+  halt(30);
+  RobotRotate(-90,10);
+  halt(30);
   RobotRotate(-90,10);
   halt(30);
 }
 
 void go2PointTest(){
-    static typeCoordinate tarPos = {1830,700}; //mm
+    static typeCoordinate tarPos = {1750,740}; //mm
     go2Point(tarPos.x,tarPos.y,SPEED_MID);
     halt(20000);
 }

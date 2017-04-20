@@ -21,8 +21,8 @@ void vBCastTask( void *pvParameters ){
     p->id = rbID;
     p->locationX = pos.x;
     p->locationY = pos.y;
-//    p->locationX = MAG_SENSOR_X;
-//    p->locationY = MAG_SENSOR_Y;
+    //p->locationX = MAG_SENSOR_X;
+    //p->locationY = MAG_SENSOR_Y;
     p->dir    = CalibrateNorth2X();//ReadMagSensorAngle2North();
     p->speedL = GetRobotSpeedLeft();
     p->speedR = GetRobotSpeedRight();

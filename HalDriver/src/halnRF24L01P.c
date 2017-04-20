@@ -60,40 +60,84 @@ void halnRF24L01PInit(void){
 
 uint8_t halnRF24L01PRdRegByte(uint8_t reg) {
   uint8_t value=0, cmd=0;
+  
+  uint8_t ceState;
+  
+  ceState = CEPinRead();
+  CEPinSetLow();
+  
   cmd = (SPI_CMD_R_REGRESTER + (reg&0x1F));
   SPI_RF_ENABLE();
   halSPI1WrByte(cmd);
   value = halSPI1RdByte();
   SPI_RF_DISABLE();
+  
+  if (ceState !=  Bit_RESET) {
+    CEPinSetHigh();
+  }
+  
   return value;
 }
 
 uint8_t halnRF24L01PWrRegByte(uint8_t reg, uint8_t data) {  
   uint8_t cmd;
   uint8_t status;
+  
+  uint8_t ceState;
+  
+  ceState = CEPinRead();
+  CEPinSetLow();
+  
   cmd = (SPI_CMD_W_REGRESTER + (reg&0x1F));
   SPI_RF_ENABLE();
   status = halSPI1WrRdByte(cmd); 
   halSPI1WrByte(data);
   SPI_RF_DISABLE();
+  
+  if (ceState !=  Bit_RESET) {
+    CEPinSetHigh();
+  }
+  
   return status;
 }
 
 uint8_t halnRF24L01PRdRegPacket(uint8_t reg, uint8_t* data, uint8_t len){
   uint8_t status;
+  
+  uint8_t ceState;
+  
+  ceState = CEPinRead();
+  CEPinSetLow();
+  
   SPI_RF_ENABLE();
   status = halSPI1WrRdByte(reg);
   halSPI1RdPacket(data, len);
   SPI_RF_DISABLE();
+  
+  if (ceState !=  Bit_RESET) {
+    CEPinSetHigh();
+  }
+  
   return status;
 }
 
 uint8_t halnRF24L01PWrRegPacket(uint8_t reg, uint8_t* data, uint8_t len){
   uint8_t status;
+  
+  uint8_t ceState;
+  
+  ceState = CEPinRead();
+  CEPinSetLow();
+  
   SPI_RF_ENABLE();
   status = halSPI1WrRdByte(reg);
   halSPI1WrPacket(data, len);
   SPI_RF_DISABLE();
+  
+  if (ceState !=  Bit_RESET) {
+    CEPinSetHigh();
+  }
+  
   return status;
 }
 

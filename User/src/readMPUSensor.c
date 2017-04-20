@@ -10,9 +10,15 @@
 #include <math.h>
 #include <string.h>
 
-volatile uint16_t rbID = 1;
-volatile int32_t MAG_SENSOR_X = 89;
-volatile int32_t MAG_SENSOR_Y = 67;
+#ifdef ROBOT1
+  volatile uint16_t rbID = 1;
+  volatile int32_t MAG_SENSOR_X = 73;
+  volatile int32_t MAG_SENSOR_Y = 86;
+#elif defined(ROBOT2)
+  volatile uint16_t rbID = 2;
+  volatile int32_t MAG_SENSOR_X = 19;
+  volatile int32_t MAG_SENSOR_Y = -113;
+#endif
 
 static typeMagSensor magSensor;
 typeMagSensor ReadMagSensor() {  

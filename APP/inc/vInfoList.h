@@ -1,6 +1,8 @@
 #ifndef __INFO_LIST_H
 #define __INFO_LIST_H
 
+
+#define ROBOT1
 #define ROBOTS 8
 #define GROBOTS 8
 

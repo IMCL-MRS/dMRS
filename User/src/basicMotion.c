@@ -53,7 +53,7 @@ void RobotRotate(float angle, int16_t speed) {
     SetRobotSpeed(0-speed, speed);
   }
   timeInterval = 1000*givenAngle*(WHEEL_L_R_DISTANCE)/(2*speed); //(L = n*PI*r/180)
-  vTaskDelay((unsigned long)(timeInterval));  //1.6
+  vTaskDelay((unsigned long)(timeInterval/1.602564));  //1.602564
   
   SetRobotSpeed(0, 0);
 }

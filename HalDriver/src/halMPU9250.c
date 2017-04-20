@@ -70,7 +70,11 @@ void halMPU9250Init(void){
   halMCUWaitMS(10);
 }
 
-uint8_t halMPU9250RdCompassX(int16_t* cx){
+////////////////////////////////////////////////////////////////////////////////
+//input : cx  -> pionter to data store addr
+//return: 0: fail  1: success
+////////////////////////////////////////////////////////////////////////////////
+uint8_t halMPU9250RdCompassX(int16_t* cx){ 
   uint8_t regValue[2]={0,0};
   uint8_t st;
   //¶ÁÈ¡×´Ì¬¼Ä´æÆ÷ST1
