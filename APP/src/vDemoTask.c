@@ -27,12 +27,11 @@ void vDemoTask( void *pvParameters ){
       break;
     }
   } 
-  //RotateToTest();
+   // rotateTest();
+  RotateToTest();
   //go2PointTest();
-  rotateTest();
   //beepSignal();
   while(1){
-    //rotateTest();;
     vTaskDelay(20);
   }
 }

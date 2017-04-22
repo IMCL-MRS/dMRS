@@ -15,8 +15,8 @@
 #pragma pack(1)
 typedef struct type_RFPacket{
   uint16_t id;          //2bytes
-  float  locationX;    //4
-  float  locationY;    //4
+  int32_t  locationX;    //4
+  int32_t  locationY;    //4
   int16_t  dir;          //2
   int16_t  speedL;     //2
   int16_t  speedR;     //2

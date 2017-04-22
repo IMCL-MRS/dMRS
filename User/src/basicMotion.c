@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+extern int16_t _gAngle2X;
+
 //void RobotRotate(int16_t angle,int16_t inSpeed) {
 //  static int16_t giveAngle;
 //  static uint32_t timeInterval;
@@ -60,7 +62,7 @@ void RobotRotate(float angle, int16_t speed) {
 
 void rotateToNorthAngle(int16_t tar, int16_t speed) {
   static int16_t ang = 0;
-  ang = tar - CalibrateNorth2X();
+  ang = tar - _gAngle2X;
   if (ang < -180) ang += 360 ;
   if (ang > 180) ang -= 360;
   RobotRotate(ang, speed);
@@ -97,7 +99,7 @@ void rotateTo(int32_t x,int32_t y, int16_t speed, u8 flag){
   static int16_t lineDir, robotDir;
   typeCoordinate start = GetCoordinate();
   lineDir = GetLineDirectionX(start.x, start.y, x, y);
-  robotDir = CalibrateNorth2X();
+  robotDir = _gAngle2X;
   turnangle = (float)(lineDir - robotDir);
   if (turnangle < -180) turnangle += 360 ;
   if (turnangle > 180) turnangle -= 360;
@@ -136,7 +138,7 @@ bool GoalInFront(int32_t x, int32_t y){
 int whichSide(int32_t x, int32_t y){
   typeCoordinate start = GetCoordinate();
   int16_t lineDir = GetLineDirectionX(start.x, start.y, x, y);
-  int16_t robotDir = CalibrateNorth2X();
+  int16_t robotDir = _gAngle2X;
   float turnangle = lineDir - robotDir;
   if (turnangle < -180) turnangle += 360;
   if (turnangle > 180) turnangle -= 360;
