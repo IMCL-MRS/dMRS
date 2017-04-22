@@ -20,6 +20,11 @@ extern uint16_t rbID;
 extern volatile int32_t MAG_SENSOR_X;
 extern volatile int32_t MAG_SENSOR_Y;
 
+void RotateToTest(){
+  static typeCoordinate tarPos = {1750,740}; //mm
+  rotateFastTo(tarPos.x,tarPos.y,SPEED_MID,ROTATE_ACCURATE);
+}
+
 void RotateTest(){
   RobotRotate(90,SPEED_SLOW);
   vTaskDelay(1000);
@@ -75,22 +80,18 @@ void rotateTest2(){
 
 void rotateTest(){
   halt(30);
-  RobotRotate(90,10);
+  RobotRotate(30,10);
   halt(30);
-  RobotRotate(90,10);
+  RobotRotate(30,10);
   halt(30);
-  RobotRotate(90,10);
+  RobotRotate(30,10);
+  halt(30);  
+  RobotRotate(-30,10);
   halt(30);
-  RobotRotate(90,10);
+  RobotRotate(-30,10);
   halt(30);
-  RobotRotate(-90,10);
-  halt(30);
-  RobotRotate(-90,10);
-  halt(30);
-  RobotRotate(-90,10);
-  halt(30);
-  RobotRotate(-90,10);
-  halt(30);
+  RobotRotate(-30,10);
+  halt(30);  
 }
 
 void go2PointTest(){

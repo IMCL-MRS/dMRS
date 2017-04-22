@@ -8,5 +8,6 @@ extern void compassTest();
 extern void rotateTest();
 extern void go2PointTest();
 extern void romReadTest();
+extern void RotateToTest();
 
 #endif

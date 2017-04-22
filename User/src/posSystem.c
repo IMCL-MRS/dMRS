@@ -23,11 +23,33 @@ typeCoordinate GetCoordinate(void) {
   disB1 = GetDistanse2B1();
   disB2 = GetDistanse2B2();
   
-  yTmp = (disB1*disB1 - disB2*disB2 + DISTANSE_B1_2_B2*DISTANSE_B1_2_B2)/(2*DISTANSE_B1_2_B2);
-  xTmp = sqrt(disB1*disB1 - DISTANSE_B_2_GROUND*DISTANSE_B_2_GROUND - yTmp*yTmp);
-  coordinateC.y = yTmp;
-  coordinateC.x = xTmp;
+  yTmp = (disB1*disB1 - disB2*disB2 + DISTANCE_B1_2_B2*DISTANCE_B1_2_B2)/(2*DISTANCE_B1_2_B2);
+  xTmp = sqrt(disB1*disB1 - DISTANCE_B_2_GROUND*DISTANCE_B_2_GROUND - yTmp*yTmp);
+  coordinateC.y = (int32_t)yTmp;
+  coordinateC.x = (int32_t)xTmp;
   return coordinateC;
 }
+
+
+//typeCoordinate GetCoordinate1(void) {
+//    static typeCoordinate __cor;
+//    float dis2b1 = GetDistance(1);
+//    float dis2b2 = GetDistance(2);
+//    float dis2b1g = sqrt( dis2b1*dis2b1 - DISTANCE_B_2_GROUND*DISTANCE_B_2_GROUND );
+//    float dis2b2g = sqrt( dis2b2*dis2b2 - DISTANCE_B_2_GROUND*DISTANCE_B_2_GROUND );
+//
+//
+//    float P = (dis2b1g + dis2b2g + DISTANCE_B1_2_B2) / 2;
+//    float S = sqrt( P * (P-dis2b1g) * (P-dis2b2g) * (P-DISTANCE_B1_2_B2) );
+//    float tempX =  (2*S/DISTANCE_B1_2_B2);
+//    __cor.x = tempX;
+//    float b1y = (sqrt( dis2b1g*dis2b1g - tempX*tempX ) );
+//    float b2y = (sqrt( dis2b2g*dis2b2g - tempX*tempX ) );
+//    __cor.y = b1y;
+//    if (fabs(b2y - b1y - DISTANCE_B1_2_B2) < 1) {
+//      __cor.y = -b1y;
+//    }
+//    return __cor;
+//}
 
 

@@ -27,6 +27,7 @@ void vDemoTask( void *pvParameters ){
       break;
     }
   } 
+  //RotateToTest();
   //go2PointTest();
   rotateTest();
   //beepSignal();
@@ -34,5 +35,4 @@ void vDemoTask( void *pvParameters ){
     //rotateTest();;
     vTaskDelay(20);
   }
-  halt(5000);     //stop 
 }

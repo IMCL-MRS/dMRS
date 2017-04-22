@@ -12,8 +12,8 @@
 
 #ifdef ROBOT1
   volatile uint16_t rbID = 1;
-  volatile int32_t MAG_SENSOR_X = 73;
-  volatile int32_t MAG_SENSOR_Y = 86;
+  volatile int32_t MAG_SENSOR_X = 65;
+  volatile int32_t MAG_SENSOR_Y = 87;
 #elif defined(ROBOT2)
   volatile uint16_t rbID = 2;
   volatile int32_t MAG_SENSOR_X = 19;

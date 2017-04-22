@@ -1,16 +1,18 @@
-#include "vBroadCastTask.h"
+
 #include "mrslib.h"
 #include "vInfoList.h"
 #include "halMPU9250.h"
 #include <math.h>
+#define PI 3.141592653
+
 
 extern xQueueHandle xQueueHandleRFTx;
 
-static Magnetic __mag, __pmag;
+static typeMagSensor __mag, __pmag;
 static float __ang2n;
 static float __ang2x;
 static int8_t __mag_busy;
-static Coordinate __cor;
+static typeCoordinate __cor;
 static uint8_t tx[32];
 
 void vBroadCastTask( void *pvParameters ){
@@ -18,14 +20,14 @@ void vBroadCastTask( void *pvParameters ){
     // Magnetic
     __pmag = __mag;
     __mag_busy = 1;
-    while(halMPU9250RdCompassX(& (__mag.x) ) == 0){
+    while(halMPU9250RdCompassX(& (__mag.magX) ) == 0){
       vTaskDelay(5);
     }  
-    while(halMPU9250RdCompassY(& (__mag.y) ) == 0){ 
+    while(halMPU9250RdCompassY(& (__mag.magY) ) == 0){ 
       vTaskDelay(5);
     }
-    float compX = (float)(__mag.x-MAG_SENSOR_X);
-    float compY = (float)(__mag.y-MAG_SENSOR_Y);
+    float compX = (float)(__mag.magX-MAG_SENSOR_X);
+    float compY = (float)(__mag.magY-MAG_SENSOR_Y);
     float length = sqrt(compX*compX + compY*compY);
     __ang2n = (acos( compY / length ) * 180 / PI);
     if (compX > 0) {
@@ -74,7 +76,7 @@ void vBroadCastTask( void *pvParameters ){
   }
 }
 
-Magnetic getMagnetic() {
+typeMagSensor getMagnetic() {
   if (__mag_busy) {
     return __pmag;
   }
@@ -90,6 +92,6 @@ float getAngle2X(){
   return __ang2x;
 }
 
-Coordinate getCoordinate() {
+typeCoordinate getCoordinate() {
   return __cor;
 }

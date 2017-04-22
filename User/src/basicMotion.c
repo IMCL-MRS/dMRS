@@ -93,10 +93,12 @@ int16_t GetLineDirectionX(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
 }
 
 void rotateTo(int32_t x,int32_t y, int16_t speed, u8 flag){
+  static  float turnangle;
+  static int16_t lineDir, robotDir;
   typeCoordinate start = GetCoordinate();
-  int16_t lineDir = GetLineDirectionX(start.x, start.y, x, y);
-  int16_t robotDir = CalibrateNorth2X();
-  float turnangle = lineDir - robotDir;
+  lineDir = GetLineDirectionX(start.x, start.y, x, y);
+  robotDir = CalibrateNorth2X();
+  turnangle = (float)(lineDir - robotDir);
   if (turnangle < -180) turnangle += 360 ;
   if (turnangle > 180) turnangle -= 360;
   if(flag == ROTATE_LARGER_15){
@@ -111,6 +113,7 @@ void rotateTo(int32_t x,int32_t y, int16_t speed, u8 flag){
   
   RobotRotate(turnangle, speed);
 }
+
 
 void rotateFastTo(int32_t x, int32_t y, int16_t speed,u8 flag) {
   rotateTo(x,y,SPEED_MID,ROTATE_ACCURATE);
