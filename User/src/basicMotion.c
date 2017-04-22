@@ -16,25 +16,6 @@
 
 extern int16_t _gAngle2X;
 
-//void RobotRotate(int16_t angle,int16_t inSpeed) {
-//  static int16_t giveAngle;
-//  static uint32_t timeInterval;
-//  
-//  int16_t speed = boundAbs(inSpeed,SPEED_MID);
-//  if (angle < 0) {
-//    giveAngle = (int16_t)(-angle*MILLIRAD_PI/180.0);   //rad
-//    SetRobotSpeed(speed, 0-speed);
-//  }
-//  else {
-//    giveAngle = (int16_t)(angle*MILLIRAD_PI/180);   //rad
-//    SetRobotSpeed(0-speed, speed);
-//  }     
-//  timeInterval = (uint32_t)(giveAngle*(WHEEL_L_R_DISTANCE)/(2.0*speed)); //(L = n*PI*r/180)
-//  vTaskDelay(timeInterval);
-//  SetRobotSpeed(0, 0);
-//  asm("NOP");
-//}
-
 void RobotRotate(float angle, int16_t speed) {
   static float givenAngle;
   static float timeInterval;
@@ -70,8 +51,12 @@ void rotateToNorthAngle(int16_t tar, int16_t speed) {
 
 //0 - 360 degree
 int16_t GetLineDirectionX(int32_t x0, int32_t y0, int32_t x1, int32_t y1) {
-  float eLong,comX, comY;
+  static float eLong,comX, comY;
   static float angle;
+  static float tempX0;
+  static float tempX1;
+  tempX0 = x0;
+  tempX1 = x1;
   
   comX = (float)(x1-x0);
   comY = (float)(y1-y0);

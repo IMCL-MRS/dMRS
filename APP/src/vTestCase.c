@@ -21,7 +21,7 @@ extern volatile int32_t MAG_SENSOR_X;
 extern volatile int32_t MAG_SENSOR_Y;
 
 void RotateToTest(){
-  static typeCoordinate tarPos = {1750,740}; //mm
+  static typeCoordinate tarPos = {1170,720}; //mm
   rotateFastTo(tarPos.x,tarPos.y,SPEED_MID,ROTATE_ACCURATE);
 }
 
